@@ -1,0 +1,11 @@
+﻿<Application x:Class="WpfApp1.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             xmlns:local="clr-namespace:WpfApp1"
+             StartupUri="StartWindow.xaml">
+    <Application.Resources>
+        <sys:String x:Key="strApp">Hello, Application world!</sys:String>
+    </Application.Resources>
+</Application>

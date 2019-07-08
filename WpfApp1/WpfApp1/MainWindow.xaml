@@ -1,0 +1,93 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Team Edit" Height="369.752" Width="800">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".25*"/>
+            <ColumnDefinition Width=".25*"/>
+            <ColumnDefinition Width=".25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"  Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Name="teamList" DisplayMemberPath="Name" SelectionChanged="TeamList_SelectionChanged"  Grid.ColumnSpan="2" Margin="0,5">
+            </ListBox>
+            <Label Grid.Row="1" Grid.Column="0">Lagnamn:</Label>
+            <TextBox Name="teamNamn" Grid.Column="1" Grid.Row="1"  Margin="0,5" />
+            <Button Grid.Column="1" Grid.Row="2" Margin="0,5"  Name="buttonSaveTeam" Click="ButtonSaveTeam_Click">Add Team</Button>
+            <Button Grid.Column="1" Grid.Row="3" Margin="0,5" Name="buttonRemoveTeam" Click="ButtonRemoveTeam_Click">Remove Selected Team</Button>
+
+        </Grid>
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ListBox Name="membrList" DisplayMemberPath="Name" SelectionChanged="MembrList_SelectionChanged" SelectionMode="Extended" Grid.ColumnSpan="3" Margin="0,5">
+            </ListBox>
+            
+            <Label Grid.Column="0"  Grid.Row="1">Namn:</Label>
+            <TextBox Name="namn" Grid.Column="1" Grid.Row="1"  Margin="0,5" />
+            <CheckBox Name="leader" Grid.Row="1" Grid.Column="2" Margin="0,5"></CheckBox>
+            <!--<Label  Grid.Column="0" Grid.Row="1">Efternamn:</Label>
+            <TextBox Name="efNamn" Grid.Column="1" Grid.Row="1" Margin="0,4,0,10"/>-->
+            <Label Grid.Column="0" Grid.Row="2">tel-nr:</Label>
+            <TextBox Name="phone" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,5"/>
+            <Label Grid.Column="0" Grid.Row="3" >Kommentar:</Label>
+            <TextBox Name="kommentar" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,5" TextWrapping="Wrap"/>
+          
+        </Grid>
+        <Grid Grid.Column="2"  Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,5,5" >Namn:</TextBlock>
+            <Image Name="leaderIcon" Grid.Row="0" Grid.Column="0" Margin="50,3,5,8"></Image>
+            <TextBlock Name="nameBlock" Grid.Row="0" Grid.Column="1" >Unasigned:</TextBlock>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" >Tel-nr:</TextBlock>
+            <TextBlock Name="telBlock" Grid.Row="1" Grid.Column="1" >Unasigned:</TextBlock>
+            
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,5,5" >Kommentar:</TextBlock>
+            <TextBlock Name="commentBlock" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap">Unasigned:</TextBlock>
+            
+            
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,0,0,10" Name="buttonSaveMember" Click="ButtonSaveMember_Click">Add Member</Button>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="0,0,0,10" Name="buttonEditMember" Click="ButtonEditMember_Click">Edit Selected Member</Button>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="0,0,0,10" Name="buttonDeleteMember" Click="ButtonDeleteMember_Click">Remove Selected Member</Button>
+
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfApp1.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".0*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width=".0*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Margin="30,0,30,10" Grid.Row="1" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width=".3*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBox Name="folderName"></TextBox>
+            <Button Click="Button_Click" Grid.Column="1">Ny</Button>
+        </Grid>
+        <ListBox BorderThickness="0" Name="lista" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" FontSize="30" HorizontalContentAlignment="Center" MouseDoubleClick="Lista_MouseDoubleClick">
+            
+        </ListBox>
+    </Grid>
+</Window>
