@@ -21,6 +21,7 @@ namespace WpfApp1
     public partial class Window1 : Window
     {
         List<Team> teams = new List<Team>();
+        List<FishType> fishNames = new List<FishType>();
         XML_Mediator xml;
         string folder;
         public Window1(string s)
@@ -29,16 +30,30 @@ namespace WpfApp1
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             xml = new XML_Mediator(s);
+            fishNames = xml.loadFishTypes();
             teams = xml.loadTeams();
             Dag1.ItemsSource = teams;
             Dag2.ItemsSource = teams;
             Dag3.ItemsSource = teams;
             this.Title += s;
+            InitializeComponent();
+            ComboBoxFishTypes.ItemsSource = fishNames;
+            ComboBoxFishTypes.SelectedIndex = 0;
         }
 
         private void TeamEdit_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWin = new MainWindow(folder);
+            MainWindow mainWin = new MainWindow(folder, this);
+            mainWin.Closed += (s, eventarg) =>
+            {
+                teams = xml.loadTeams();
+                Dag1.ItemsSource = teams;
+                Dag2.ItemsSource = teams;
+                Dag3.ItemsSource = teams;
+                Dag1.SelectedIndex = -1;
+                Dag2.SelectedIndex = -1;
+                Dag3.SelectedIndex = -1;
+            };
             mainWin.ShowDialog();
         }
 
@@ -52,7 +67,7 @@ namespace WpfApp1
                     case "Dag1":
                         if (Dag1.SelectedItem != null)
                         {
-                            (Dag1.SelectedItem as Team).day1.Add(new Fish { weight = input });
+                            (Dag1.SelectedItem as Team).day1.Add(new Fish { weight = input, fishType = fishNames[ComboBoxFishTypes.SelectedIndex] });
                             xml.SaveTeam(Dag1.SelectedItem as Team);
                             fishList.Items.Refresh();
                             Dag1.Items.Refresh();
@@ -62,7 +77,7 @@ namespace WpfApp1
                     case "Dag2":
                         if (Dag2.SelectedItem != null)
                         {
-                            (Dag2.SelectedItem as Team).day2.Add(new Fish { weight = input });
+                            (Dag2.SelectedItem as Team).day2.Add(new Fish { weight = input, fishType = fishNames[ComboBoxFishTypes.SelectedIndex] });
                             xml.SaveTeam(Dag2.SelectedItem as Team);
                             fishList.Items.Refresh();
                             Dag2.Items.Refresh();
@@ -72,7 +87,7 @@ namespace WpfApp1
                     case "Dag3":
                         if (Dag2.SelectedItem != null)
                         {
-                            (Dag3.SelectedItem as Team).day3.Add(new Fish { weight = input });
+                            (Dag3.SelectedItem as Team).day3.Add(new Fish { weight = input, fishType = fishNames[ComboBoxFishTypes.SelectedIndex] });
                             xml.SaveTeam(Dag3.SelectedItem as Team);
                             fishList.Items.Refresh();
                             Dag3.Items.Refresh();
@@ -89,17 +104,29 @@ namespace WpfApp1
 
         private void Dag1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            fishList.ItemsSource = (Dag1.SelectedItem as Team).day1;
+            try
+            {
+                fishList.ItemsSource = (Dag1.SelectedItem as Team).day1;
+            }
+            catch { }
         }
 
         private void Dag2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            fishList.ItemsSource = (Dag2.SelectedItem as Team).day2;
+            try
+            {
+                fishList.ItemsSource = (Dag2.SelectedItem as Team).day2;
+            }
+            catch { }
         }
 
         private void Dag3_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            fishList.ItemsSource = (Dag3.SelectedItem as Team).day3;
+            try
+            {
+                fishList.ItemsSource = (Dag3.SelectedItem as Team).day3;
+            }
+            catch { }
         }
 
         private void DayTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -188,7 +215,7 @@ namespace WpfApp1
                         case "Dag1":
                             if (Dag1.SelectedItem != null)
                             {
-                                (Dag1.SelectedItem as Team).day1.Add(new Fish { weight = input });
+                                (Dag1.SelectedItem as Team).day1.Add(new Fish { weight = input, fishType = fishNames[ComboBoxFishTypes.SelectedIndex] });
                                 xml.SaveTeam(Dag1.SelectedItem as Team);
                                 fishList.Items.Refresh();
                                 Dag1.Items.Refresh();
@@ -198,7 +225,7 @@ namespace WpfApp1
                         case "Dag2":
                             if (Dag2.SelectedItem != null)
                             {
-                                (Dag2.SelectedItem as Team).day2.Add(new Fish { weight = input });
+                                (Dag2.SelectedItem as Team).day2.Add(new Fish { weight = input, fishType = fishNames[ComboBoxFishTypes.SelectedIndex] });
                                 xml.SaveTeam(Dag2.SelectedItem as Team);
                                 fishList.Items.Refresh();
                                 Dag2.Items.Refresh();
@@ -208,7 +235,7 @@ namespace WpfApp1
                         case "Dag3":
                             if (Dag2.SelectedItem != null)
                             {
-                                (Dag3.SelectedItem as Team).day3.Add(new Fish { weight = input });
+                                (Dag3.SelectedItem as Team).day3.Add(new Fish { weight = input, fishType = fishNames[ComboBoxFishTypes.SelectedIndex] });
                                 xml.SaveTeam(Dag3.SelectedItem as Team);
                                 fishList.Items.Refresh();
                                 Dag3.Items.Refresh();
@@ -227,7 +254,9 @@ namespace WpfApp1
 
         private void ButtonPrintOptions_Click(object sender, RoutedEventArgs e)
         {
-
+            PrintWindow prntWin = new PrintWindow(folder, teams);
+            prntWin.ShowDialog();
         }
+
     }
 }

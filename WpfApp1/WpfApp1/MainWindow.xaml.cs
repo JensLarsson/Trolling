@@ -26,9 +26,11 @@ namespace WpfApp1
         List<Team> teams = new List<Team>();
         XML_Mediator xml;
         Image image = new Image();
+        Window1 mainWin;
 
-        public MainWindow(string folder)
+        public MainWindow(string folder, Window1 win)
         {
+            mainWin = win;
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             xml = new XML_Mediator(folder);
@@ -48,7 +50,12 @@ namespace WpfApp1
                 Member mbr = new Member();
                 mbr.Name = namn.Text;
                 mbr.phoneNr = phone.Text;
+                mbr.email = email.Text;
                 mbr.comment = kommentar.Text;
+                if ((teamList.SelectedItem as Team)._members.Count < 1)
+                {
+                    mbr.leader = true;
+                }
 
                 if (mbr.Name.Length > 0 && mbr.Name != null)
                 {
@@ -68,6 +75,7 @@ namespace WpfApp1
         {
             namn.Clear();
             phone.Clear();
+            email.Clear();
             kommentar.Clear();
         }
 
@@ -82,6 +90,7 @@ namespace WpfApp1
                 {
                     nameBlock.Text = (membrList.Items[0] as Member).Name;
                     telBlock.Text = (membrList.Items[0] as Member).phoneNr;
+                    emailBlock.Text = (membrList.Items[0] as Member).email;
                     commentBlock.Text = (membrList.Items[0] as Member).comment;
                     if ((membrList.Items[0] as Member).leader)
                     {
@@ -101,6 +110,7 @@ namespace WpfApp1
             {
                 nameBlock.Text = (membrList.SelectedItem as Member).Name;
                 telBlock.Text = (membrList.SelectedItem as Member).phoneNr;
+                emailBlock.Text = (membrList.SelectedItem as Member).email;
                 commentBlock.Text = (membrList.SelectedItem as Member).comment;
                 if ((membrList.SelectedItem as Member).leader)
                 {
@@ -121,12 +131,13 @@ namespace WpfApp1
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     (membrList.SelectedItem as Member).Name = namn.Text;
-                    (membrList.SelectedItem as Member).leader = (bool)leader.IsChecked;
                     (membrList.SelectedItem as Member).phoneNr = phone.Text;
+                    (membrList.SelectedItem as Member).email = email.Text;
                     (membrList.SelectedItem as Member).comment = kommentar.Text;
                     membrList.Items.Refresh();
                     xml.SaveTeam(teamList.SelectedItem as Team);
                     nameBlock.Text = (membrList.SelectedItem as Member).Name;
+                    emailBlock.Text = (membrList.SelectedItem as Member).email;
                     telBlock.Text = (membrList.SelectedItem as Member).phoneNr;
                     commentBlock.Text = (membrList.SelectedItem as Member).comment;
                     if ((membrList.SelectedItem as Member).leader)
@@ -168,8 +179,10 @@ namespace WpfApp1
                 {
                     Team team = new Team();
                     team.Name = teamNamn.Text;
+                    team.marker = marker.Text;
                     teams.Add(team);
                     teamNamn.Clear();
+                    marker.Clear();
                     teamList.Items.Refresh();
                 }
             }
@@ -190,6 +203,32 @@ namespace WpfApp1
                     ClearBoxes();
                 }
             }
+        }
+
+        private void ButtonMakeLeader_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Member member in (teamList.SelectedItem as Team)._members)
+            {
+                member.leader = false;
+            }
+            (membrList.SelectedItem as Member).leader = true;
+
+            if (membrList.SelectedItem != null)
+            {
+                nameBlock.Text = (membrList.SelectedItem as Member).Name;
+                telBlock.Text = (membrList.SelectedItem as Member).phoneNr;
+                emailBlock.Text = (membrList.SelectedItem as Member).email;
+                commentBlock.Text = (membrList.SelectedItem as Member).comment;
+                if ((membrList.SelectedItem as Member).leader)
+                {
+                    leaderIcon.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    leaderIcon.Visibility = Visibility.Hidden;
+                }
+            }
+            xml.SaveTeam(teamList.SelectedItem as Team);
         }
     }
 }

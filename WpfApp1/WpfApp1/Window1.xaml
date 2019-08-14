@@ -65,13 +65,22 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <ListBox Grid.Row="0" Name="fishList" DisplayMemberPath="weight"/>
+            <ListBox Grid.Row="0" Name="fishList" DisplayMemberPath="displayString" />
             <StackPanel Grid.Row="1" >
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Margin" Value="0,5,0,0"/>
                     </Style>
                 </StackPanel.Resources>
+                <ComboBox Name="ComboBoxFishTypes">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Height="16" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <TextBox Name="FishWeightTextBox" Margin="0,5,0,0" KeyDown="FishWeightTextBox_KeyDown">
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">

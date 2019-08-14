@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Team xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <marker />
+  <_members>
+    <Member>
+      <leader>true</leader>
+      <phoneNr />
+      <comment />
+      <email />
+      <Name>asdf</Name>
+    </Member>
+  </_members>
+  <day1 />
+  <day2 />
+  <day3 />
+  <Name>asfasdfasdf</Name>
+</Team>

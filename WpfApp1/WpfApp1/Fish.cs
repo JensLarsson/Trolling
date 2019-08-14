@@ -8,6 +8,16 @@ namespace WpfApp1
 {
     public class Fish
     {
+        public string displayString
+        {
+            get { return $"{weight.ToString()}g {fishType.Name}"; }
+        }
         public float weight { get; set; }
+        public FishType fishType { get; set; }
+    }
+
+    public class FishType
+    {
+        public string Name { get; set; }
     }
 }

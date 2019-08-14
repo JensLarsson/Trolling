@@ -14,7 +14,7 @@ namespace WpfApp1
         string folder;
         public XML_Mediator(string s)
         {
-            folder = Directory.GetCurrentDirectory() + "/Teams/" + s +"/";
+            folder = Directory.GetCurrentDirectory() + "/Teams/" + s + "/";
         }
 
         public List<Team> loadTeams()
@@ -46,6 +46,32 @@ namespace WpfApp1
             {
                 serializer.Serialize(tw, team);
             }
+        }
+
+        public void SaveFishes(List<FishType> fishes)
+        {
+            string folderPath = Directory.GetCurrentDirectory() + "/fishes.xml";
+            XmlSerializer serializer = new XmlSerializer(typeof(List<FishType>));
+            using (TextWriter tw = new StreamWriter(folderPath))
+            {
+                serializer.Serialize(tw, fishes);
+            }
+        }
+
+        public List<FishType> loadFishTypes()
+        {
+            List<FishType> fishes = new List<FishType>();
+            string filePath = Directory.GetCurrentDirectory() + "/fishes.xml";
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<FishType>));
+            TextReader reader = new StreamReader(filePath);
+            object obj = serializer.Deserialize(reader);
+            fishes = (List<FishType>)obj;
+            reader.Close();
+
+            return fishes;
         }
 
         public void DeleteTeam(Team team)

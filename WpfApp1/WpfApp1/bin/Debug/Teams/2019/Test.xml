@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Team xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <marker>Blå mast</marker>
   <_members>
     <Member>
-      <leader>false</leader>
-      <phoneNr>123456789 Test test</phoneNr>
+      <leader>true</leader>
+      <phoneNr />
       <comment />
-      <Name>Bobby</Name>
+      <email />
+      <Name>Bob Bobsson</Name>
     </Member>
     <Member>
       <leader>false</leader>
-      <phoneNr>070-1234567</phoneNr>
-      <comment>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet consequat quam. Aliquam feugiat.</comment>
-      <Name>Tom</Name>
+      <phoneNr />
+      <comment />
+      <email />
+      <Name>Charls 3rd</Name>
     </Member>
   </_members>
   <day1 />
   <day2 />
   <day3 />
-  <Name>TestTeam</Name>
+  <Name>Test</Name>
 </Team>

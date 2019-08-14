@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="PrintWindow" Height="450" Width="800">
+        Title="PrintWindow" Height="450" Width="400" ResizeMode="NoResize">
     <Grid>
-        <Button Name="ButtonStartPrint" Click="ButtonStartPrint_Click">Print</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Margin="0,2" Name="ButtonStartPrint" Click="ButtonStartPrint_Click">Print Scoreboard</Button>
+            <Button Margin="0,2"  Name="PrintTeamInfo" Click="PrintTeamInfo_Click">Print Team Info</Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" >
+            <CheckBox Margin="0,4"  Name="printFish">Scoreboard shows fishes</CheckBox>
+            <CheckBox Margin="0,4"  Name="printPersonalInf">Print Contact Info</CheckBox>
+        </StackPanel>
     </Grid>
 </Window>

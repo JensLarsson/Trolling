@@ -10,6 +10,6 @@ namespace WpfApp1
     {
         public bool leader;
         public string Name { get; set; }
-        public string phoneNr, comment;
+        public string phoneNr, comment, email;
     }
 }

@@ -19,6 +19,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -27,9 +28,11 @@
             <ListBox Name="teamList" DisplayMemberPath="Name" SelectionChanged="TeamList_SelectionChanged"  Grid.ColumnSpan="2" Margin="0,5">
             </ListBox>
             <Label Grid.Row="1" Grid.Column="0">Lagnamn:</Label>
+            <Label Grid.Row="2" Grid.Column="0">Kännetecken:</Label>
             <TextBox Name="teamNamn" Grid.Column="1" Grid.Row="1"  Margin="0,5" />
-            <Button Grid.Column="1" Grid.Row="2" Margin="0,5"  Name="buttonSaveTeam" Click="ButtonSaveTeam_Click">Add Team</Button>
-            <Button Grid.Column="1" Grid.Row="3" Margin="0,5" Name="buttonRemoveTeam" Click="ButtonRemoveTeam_Click">Remove Selected Team</Button>
+            <TextBox Name="marker" Grid.Column="1" Grid.Row="2"  Margin="0,5" />
+            <Button Grid.Column="1" Grid.Row="3" Margin="0,5"  Name="buttonSaveTeam" Click="ButtonSaveTeam_Click">Skapa Lag</Button>
+            <Button Grid.Column="1" Grid.Row="4" Margin="0,5" Name="buttonRemoveTeam" Click="ButtonRemoveTeam_Click">Ta Bort Markerat Lag</Button>
 
         </Grid>
         <Grid Grid.Column="1" Margin="10">
@@ -43,19 +46,22 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <ListBox Name="membrList" DisplayMemberPath="Name" SelectionChanged="MembrList_SelectionChanged" SelectionMode="Extended" Grid.ColumnSpan="3" Margin="0,5">
             </ListBox>
             
             <Label Grid.Column="0"  Grid.Row="1">Namn:</Label>
             <TextBox Name="namn" Grid.Column="1" Grid.Row="1"  Margin="0,5" />
-            <CheckBox Name="leader" Grid.Row="1" Grid.Column="2" Margin="0,5"></CheckBox>
-            <!--<Label  Grid.Column="0" Grid.Row="1">Efternamn:</Label>
-            <TextBox Name="efNamn" Grid.Column="1" Grid.Row="1" Margin="0,4,0,10"/>-->
-            <Label Grid.Column="0" Grid.Row="2">tel-nr:</Label>
+
+            <Label Grid.Column="0" Grid.Row="2">Tel-nr:</Label>
             <TextBox Name="phone" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,5"/>
-            <Label Grid.Column="0" Grid.Row="3" >Kommentar:</Label>
-            <TextBox Name="kommentar" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,5" TextWrapping="Wrap"/>
+
+            <Label Grid.Column="0" Grid.Row="3">Email:</Label>
+            <TextBox Name="email" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,5"/>
+            
+            <Label Grid.Column="0" Grid.Row="4" >Kommentar:</Label>
+            <TextBox Name="kommentar" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,5" TextWrapping="Wrap"/>
           
         </Grid>
         <Grid Grid.Column="2"  Margin="10">
@@ -67,7 +73,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -79,14 +87,18 @@
 
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,5,5" >Tel-nr:</TextBlock>
             <TextBlock Name="telBlock" Grid.Row="1" Grid.Column="1" >Unasigned:</TextBlock>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,5,5" >Email:</TextBlock>
+            <TextBlock Name="emailBlock" Grid.Row="2" Grid.Column="1" >Unasigned:</TextBlock>
             
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,5,5" >Kommentar:</TextBlock>
-            <TextBlock Name="commentBlock" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap">Unasigned:</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,5,5" >Kommentar:</TextBlock>
+            <TextBlock Name="commentBlock" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap">Unasigned:</TextBlock>
             
             
-            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,0,0,10" Name="buttonSaveMember" Click="ButtonSaveMember_Click">Add Member</Button>
-            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="0,0,0,10" Name="buttonEditMember" Click="ButtonEditMember_Click">Edit Selected Member</Button>
-            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="0,0,0,10" Name="buttonDeleteMember" Click="ButtonDeleteMember_Click">Remove Selected Member</Button>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="0,0,0,10" Name="buttonSaveMember" Click="ButtonSaveMember_Click">Skapa Medlem</Button>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="0,0,0,10" Name="buttonMakeLeader" Click="ButtonMakeLeader_Click">Gör Markerad Medlem Skeppare</Button>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="0,0,0,10" Name="buttonEditMember" Click="ButtonEditMember_Click">Skriv Över Markerad Medlem</Button>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Margin="0,0,0,10" Name="buttonDeleteMember" Click="ButtonDeleteMember_Click">Ta Bort Markerad Medlem</Button>
 
         </Grid>
     </Grid>

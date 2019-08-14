@@ -52,3 +52,10 @@ D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\Window1.g.cs
 D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\Window1.baml
 D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\PrintWindow.g.cs
 D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\PrintWindow.baml
+D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\PdfSharp.Charting.dll
+D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\PdfSharp.dll
+D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\PdfSharp.xml
+D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\PdfSharp.Charting.xml
+D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\de\PdfSharp.resources.dll
+D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\de\PdfSharp.Charting.resources.dll
+D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
