@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using System.Diagnostics;
-using System.Linq;
+using System.IO;
 
 namespace WpfApp1
 {
@@ -35,6 +35,7 @@ namespace WpfApp1
             teamChoise.ItemsSource = teams;
         }
 
+        //Skriver ut alla lag i positionsordning
         private void ButtonStartPrint_Click(object sender, RoutedEventArgs e)
         {
             teams = teams.OrderByDescending(x => x.totalScore).ToList();
@@ -134,6 +135,7 @@ namespace WpfApp1
             Process.Start(filename);
         }
 
+        //Skriver ut info om alla lag
         private void PrintTeamInfo_Click(object sender, RoutedEventArgs e)
         {
             // Create a new PDF document
@@ -229,9 +231,26 @@ namespace WpfApp1
             Process.Start(filename);
         }
 
+        //Skriver ut kvitto
         private void DayPrint_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+            PdfDocument document = new PdfDocument();
+            XPen pen = new XPen(XColors.Black, 1);
 
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            double xPos = 5, yPos = 5;
+
+
+            XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + "/Image/JamtTroll.png");
+            double scale = (page.Width - 10) / image.Width;
+            gfx.DrawImage(image, xPos, yPos, image.Width * scale, image.Height * scale);
+
+
+            //End
+            string filename = "Kvitto.pdf";
+            document.Save(filename);
+            Process.Start(filename);
         }
     }
 }

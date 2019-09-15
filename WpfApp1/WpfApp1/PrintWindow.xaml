@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="PrintWindow" Height="450" Width="400" ResizeMode="NoResize">
+        Title="PrintWindow" Height="300" Width="400" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,7 +17,7 @@
             <Button Margin="2,4" Name="DayPrint" Click="DayPrint_Click">Print Day Receipt</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" >
-            <CheckBox Margin="0,6"  Name="printFish">Scoreboard shows fishes</CheckBox>
+            <CheckBox Margin="0,6"  Name="printFish">Scoreboard shows fish</CheckBox>
             <CheckBox Margin="0,8"  Name="printPersonalInf">Print Contact Info</CheckBox>
             <Grid>
                 <Grid.ColumnDefinitions>
