@@ -59,28 +59,40 @@ namespace WpfApp1
                 // Get an XGraphics object for drawing
                 XGraphics gfx = XGraphics.FromPdfPage(page);
                 double thirdWidth = page.Width / 3;
-                double horizontal = 10;
-                double vertical = 10;
+                double horizontal = 4;
+                double vertical = 4;
                 double verticalSpacing = 2;
 
-                for (int Index = 0; Index < 5; Index++)
+                XFont font = new XFont("Verdana", 16, XFontStyle.Bold);
+
+                XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + "/Image/JamtTroll.png");
+                double scale = (page.Width - 10) / image.Width;
+                gfx.DrawImage(image, horizontal, vertical, image.Width * scale, image.Height * scale);
+
+                vertical += image.Height * scale + 5;
+                gfx.DrawString($"Test", font, XBrushes.Black,
+                                new XRect(80, image.Height * scale / 2 - 4, page.Width, page.Height),
+                                XStringFormat.TopLeft);
+
+                if ((bool)printFish.IsChecked)
                 {
-                    int teamIndex = pageIndex * 5 + Index;
-                    if (teamIndex >= teams.Count)
+                    for (int Index = 0; Index < 5; Index++)
                     {
-                        break;
-                    }
-                    // Create a font
-                    XFont font = new XFont("Verdana", 15, XFontStyle.Bold);
-                    // Draw the text
-                    gfx.DrawString($"{teamIndex + 1} {teams[teamIndex].Name}: {teams[teamIndex].totalScore.ToString()} poäng", font, XBrushes.Black,
-                      new XRect(horizontal, vertical, page.Width, page.Height),
-                      XStringFormat.TopLeft);
+                        int teamIndex = pageIndex * 5 + Index;
+                        if (teamIndex >= teams.Count)
+                        {
+                            break;
+                        }
+                        // Create a font
+                        font = new XFont("Verdana", 15, XFontStyle.Bold);
+                        // Draw the text
+                        gfx.DrawString($"{teamIndex + 1} {teams[teamIndex].Name}: {teams[teamIndex].totalScore.ToString()} poäng", font, XBrushes.Black,
+                          new XRect(horizontal, vertical, page.Width, page.Height),
+                          XStringFormat.TopLeft);
 
-                    vertical += font.Size + verticalSpacing;        //new row
+                        vertical += font.Size + verticalSpacing;        //new row
 
-                    if ((bool)printFish.IsChecked)
-                    {
+
 
                         string dayName = "Dag ";
                         font = new XFont("Verdana", 15, XFontStyle.Underline);
@@ -123,9 +135,30 @@ namespace WpfApp1
 
                             vertical += font.Size + verticalSpacing; //new row
                         }
+                        vertical += font.Size + verticalSpacing; //new row
                     }
                     vertical += font.Size + verticalSpacing; //new row
 
+
+                }
+                else
+                {
+                    for (int Index = 0; Index < 40; Index++)
+                    {
+                        int teamIndex = pageIndex * 40 + Index;
+                        if (teamIndex >= teams.Count)
+                        {
+                            break;
+                        }
+                        // Create a font
+                        font = new XFont("Verdana", 15, XFontStyle.Bold);
+                        // Draw the text
+                        gfx.DrawString($"{teamIndex + 1} {teams[teamIndex].Name}: {teams[teamIndex].totalScore.ToString()} poäng", font, XBrushes.Black,
+                          new XRect(horizontal, vertical, page.Width, page.Height),
+                          XStringFormat.TopLeft);
+
+                        vertical += font.Size + verticalSpacing + 2;        //new row
+                    }
                 }
             }
             // Save the document...
@@ -233,18 +266,23 @@ namespace WpfApp1
 
         //Skriver ut kvitto
         private void DayPrint_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             PdfDocument document = new PdfDocument();
             XPen pen = new XPen(XColors.Black, 1);
 
             PdfPage page = document.AddPage();
             XGraphics gfx = XGraphics.FromPdfPage(page);
+            XFont font = new XFont("Verdana", 16, XFontStyle.Bold);
             double xPos = 5, yPos = 5;
-
 
             XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + "/Image/JamtTroll.png");
             double scale = (page.Width - 10) / image.Width;
             gfx.DrawImage(image, xPos, yPos, image.Width * scale, image.Height * scale);
+
+            gfx.DrawString($"Test", font, XBrushes.Black,
+                            new XRect(80, image.Height * scale / 2 - 4, page.Width, page.Height),
+                            XStringFormat.TopLeft);
+
 
 
             //End

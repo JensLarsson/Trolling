@@ -10,7 +10,44 @@
       <Name>afasdf</Name>
     </Member>
   </_members>
-  <day1 />
+  <day1>
+    <Fish>
+      <weight>123</weight>
+      <fishType>
+        <Name />
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>123</weight>
+      <fishType>
+        <Name>Röding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>123</weight>
+      <fishType>
+        <Name>Öring</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>123</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>123</weight>
+      <fishType>
+        <Name>Öring</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>321</weight>
+      <fishType>
+        <Name />
+      </fishType>
+    </Fish>
+  </day1>
   <day2 />
   <day3 />
   <Name>afafdasfsaf</Name>

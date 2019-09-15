@@ -5,40 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="PrintWindow" Height="300" Width="400" ResizeMode="NoResize">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <Button Margin="2,4" Name="ButtonStartPrint" Click="ButtonStartPrint_Click">Print Scoreboard</Button>
-            <Button Margin="2,4"  Name="PrintTeamInfo" Click="PrintTeamInfo_Click">Print Team Info</Button>
-            <Button Margin="2,4" Name="DayPrint" Click="DayPrint_Click">Print Day Receipt</Button>
-        </StackPanel>
-        <StackPanel Grid.Column="1" >
-            <CheckBox Margin="0,6"  Name="printFish">Scoreboard shows fish</CheckBox>
-            <CheckBox Margin="0,8"  Name="printPersonalInf">Print Contact Info</CheckBox>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <ComboBox Margin="2,1" Name="teamChoise" Grid.Column="0">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" Height="16" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <ComboBox Margin="2,1" Name="teamDay" Grid.Column="1">
-                    <ComboBoxItem>Day1</ComboBoxItem>
-                    <ComboBoxItem>Day2</ComboBoxItem>
-                    <ComboBoxItem>Day3</ComboBoxItem>
-                </ComboBox>
-            </Grid>
-        </StackPanel>
-    </Grid>
+        Title="PrintWindow" Height="200" Width="600" ResizeMode="NoResize">
+    <StackPanel>
+        <TextBox Name="teamNamn" Margin="5" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{x:Null}" Margin="0,5,0,0" />
+            <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{x:Null}" Margin="0,5,0,0" />
+
+            <StackPanel Grid.Column="0">
+                <Button Margin="2,4" Name="ButtonStartPrint" Click="ButtonStartPrint_Click">Print Scoreboard</Button>
+                <CheckBox Margin="5,2"  Name="printFish">Scoreboard shows fish</CheckBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" >
+                <Button Margin="2,4"  Name="PrintTeamInfo" Click="PrintTeamInfo_Click">Print Team Info</Button>
+                <CheckBox Margin="5,2"  Name="printPersonalInf">Print Contact Info</CheckBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2" >
+                <Button Margin="2,4" Name="DayPrint" Click="DayPrint_Click">Print Day Receipt</Button>
+                <Grid Margin="2,4" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Margin="2,1" Name="teamChoise" Grid.Column="0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" Height="16" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox Margin="2,1" Name="teamDay" Grid.Column="1">
+                        <ComboBoxItem>Day1</ComboBoxItem>
+                        <ComboBoxItem>Day2</ComboBoxItem>
+                        <ComboBoxItem>Day3</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+
+            </StackPanel>
+        </Grid>
+    </StackPanel>
 </Window>
