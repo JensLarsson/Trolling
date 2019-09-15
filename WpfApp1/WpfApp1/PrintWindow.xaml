@@ -12,12 +12,33 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Button Margin="0,2" Name="ButtonStartPrint" Click="ButtonStartPrint_Click">Print Scoreboard</Button>
-            <Button Margin="0,2"  Name="PrintTeamInfo" Click="PrintTeamInfo_Click">Print Team Info</Button>
+            <Button Margin="2,4" Name="ButtonStartPrint" Click="ButtonStartPrint_Click">Print Scoreboard</Button>
+            <Button Margin="2,4"  Name="PrintTeamInfo" Click="PrintTeamInfo_Click">Print Team Info</Button>
+            <Button Margin="2,4" Name="DayPrint" Click="DayPrint_Click">Print Day Receipt</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" >
-            <CheckBox Margin="0,4"  Name="printFish">Scoreboard shows fishes</CheckBox>
-            <CheckBox Margin="0,4"  Name="printPersonalInf">Print Contact Info</CheckBox>
+            <CheckBox Margin="0,6"  Name="printFish">Scoreboard shows fishes</CheckBox>
+            <CheckBox Margin="0,8"  Name="printPersonalInf">Print Contact Info</CheckBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Margin="2,1" Name="teamChoise" Grid.Column="0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Height="16" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ComboBox Margin="2,1" Name="teamDay" Grid.Column="1">
+                    <ComboBoxItem>Day1</ComboBoxItem>
+                    <ComboBoxItem>Day2</ComboBoxItem>
+                    <ComboBoxItem>Day3</ComboBoxItem>
+                </ComboBox>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

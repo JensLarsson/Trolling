@@ -31,6 +31,8 @@ namespace WpfApp1
             InitializeComponent();
             xml = new XML_Mediator(s);
             teams = teamList;
+
+            teamChoise.ItemsSource = teams;
         }
 
         private void ButtonStartPrint_Click(object sender, RoutedEventArgs e)
@@ -225,6 +227,11 @@ namespace WpfApp1
             document.Save(filename);
             // ...and start a viewer.
             Process.Start(filename);
+        }
+
+        private void DayPrint_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
