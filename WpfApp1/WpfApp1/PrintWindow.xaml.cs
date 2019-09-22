@@ -15,6 +15,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.Win32;
 
 namespace WpfApp1
 {
@@ -25,20 +26,36 @@ namespace WpfApp1
     {
         XML_Mediator xml;
         List<Team> teams;
+        Team[] teamArray;
+        Info info;
         public PrintWindow(string s, List<Team> teamList)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
             xml = new XML_Mediator(s);
             teams = teamList;
-
+            try
+            {
+                info = xml.loadInfo();
+            }
+            catch
+            {
+                info = new Info();
+            }
+            if (info.headerText != "")
+            {
+                HeaderText.Text = info.headerText;
+            }
             teamChoise.ItemsSource = teams;
+            teamChoise.SelectedIndex = 0;
+            teamDay.SelectedIndex = 0;
         }
 
         //Skriver ut alla lag i positionsordning
         private void ButtonStartPrint_Click(object sender, RoutedEventArgs e)
         {
             teams = teams.OrderByDescending(x => x.totalScore).ToList();
+            teamArray = teams.ToArray();
             // Create a new PDF document
             PdfDocument document = new PdfDocument();
 
@@ -52,6 +69,7 @@ namespace WpfApp1
                 pages = (int)Math.Ceiling(teams.Count / 40.0f);
             }
 
+            XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + info.headerPath);
             for (int pageIndex = 0; pageIndex < pages; pageIndex++)
             {
                 // Create an empty page
@@ -65,18 +83,19 @@ namespace WpfApp1
 
                 XFont font = new XFont("Verdana", 16, XFontStyle.Bold);
 
-                XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + "/Image/JamtTroll.png");
                 double scale = (page.Width - 10) / image.Width;
                 gfx.DrawImage(image, horizontal, vertical, image.Width * scale, image.Height * scale);
 
                 vertical += image.Height * scale + 5;
-                gfx.DrawString($"Test", font, XBrushes.Black,
+                gfx.DrawString(HeaderText.Text, font, XBrushes.Black,
                                 new XRect(80, image.Height * scale / 2 - 4, page.Width, page.Height),
                                 XStringFormat.TopLeft);
 
-                if ((bool)printFish.IsChecked)
+                if ((bool)printFish.IsChecked) //This loop is super slow for some reason
                 {
-                    for (int Index = 0; Index < 5; Index++)
+                    double d = (page.Height - (image.Height * scale + 5) - 10) / (8.5 * (font.Size + verticalSpacing)); //only used for the rowCount int
+                    int teamsOnPage = (int)d;
+                    for (int Index = 0; Index < teamsOnPage; Index++)
                     {
                         int teamIndex = pageIndex * 5 + Index;
                         if (teamIndex >= teams.Count)
@@ -93,10 +112,8 @@ namespace WpfApp1
                         vertical += font.Size + verticalSpacing;        //new row
 
 
-
                         string dayName = "Dag ";
                         font = new XFont("Verdana", 15, XFontStyle.Underline);
-                        // Draw the text
 
 
                         for (int i = 0; i < 3; i++)
@@ -113,21 +130,21 @@ namespace WpfApp1
                         {
                             try
                             {
-                                gfx.DrawString(teams[teamIndex].day1[i].displayString, font, XBrushes.Black,
+                                gfx.DrawString(teamArray[teamIndex].day1[i].displayString, font, XBrushes.Black,
                                     new XRect(horizontal + thirdWidth * 0, vertical, page.Width, page.Height),
                                     XStringFormat.TopLeft);
                             }
                             catch { }
                             try
                             {
-                                gfx.DrawString(teams[teamIndex].day2[i].displayString, font, XBrushes.Black,
+                                gfx.DrawString(teamArray[teamIndex].day2[i].displayString, font, XBrushes.Black,
                                 new XRect(horizontal + thirdWidth * 1, vertical, page.Width, page.Height),
                                 XStringFormat.TopLeft);
                             }
                             catch { }
                             try
                             {
-                                gfx.DrawString(teams[teamIndex].day3[i].displayString, font, XBrushes.Black,
+                                gfx.DrawString(teamArray[teamIndex].day3[i].displayString, font, XBrushes.Black,
                                 new XRect(horizontal + thirdWidth * 2, vertical, page.Width, page.Height),
                                 XStringFormat.TopLeft);
                             }
@@ -137,21 +154,23 @@ namespace WpfApp1
                         }
                         vertical += font.Size + verticalSpacing; //new row
                     }
-                    vertical += font.Size + verticalSpacing; //new row
 
 
                 }
                 else
                 {
-                    for (int Index = 0; Index < 40; Index++)
+                    // Create a font
+                    font = new XFont("Verdana", 15, XFontStyle.Bold);
+                    double d = (page.Height - (image.Height * scale + 5) - 10) / (font.Size + verticalSpacing + 2); //only used for the rowCount int
+                    int rowCount = (int)d;
+
+                    for (int Index = 0; Index < rowCount; Index++)
                     {
                         int teamIndex = pageIndex * 40 + Index;
                         if (teamIndex >= teams.Count)
                         {
                             break;
                         }
-                        // Create a font
-                        font = new XFont("Verdana", 15, XFontStyle.Bold);
                         // Draw the text
                         gfx.DrawString($"{teamIndex + 1} {teams[teamIndex].Name}: {teams[teamIndex].totalScore.ToString()} poäng", font, XBrushes.Black,
                           new XRect(horizontal, vertical, page.Width, page.Height),
@@ -275,20 +294,91 @@ namespace WpfApp1
             XFont font = new XFont("Verdana", 16, XFontStyle.Bold);
             double xPos = 5, yPos = 5;
 
-            XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + "/Image/JamtTroll.png");
+            XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + info.headerPath);
             double scale = (page.Width - 10) / image.Width;
             gfx.DrawImage(image, xPos, yPos, image.Width * scale, image.Height * scale);
 
-            gfx.DrawString($"Test", font, XBrushes.Black,
+            gfx.DrawString(HeaderText.Text, font, XBrushes.Black,
                             new XRect(80, image.Height * scale / 2 - 4, page.Width, page.Height),
                             XStringFormat.TopLeft);
 
+            xPos = 10;
+            yPos += image.Height * scale + 5; //Text after image starts here
+
+            Team team = teamChoise.SelectedValue as Team;
+            gfx.DrawString($"{team.Name} {teamDay.SelectedValue}: ", font, XBrushes.Black,
+                            new XRect(xPos, yPos, page.Width, page.Height),
+                            XStringFormat.TopLeft);
+            yPos += font.Size + 5;
+            font = new XFont("Verdana", 15, XFontStyle.Regular);
+
+            List<Fish> fishes = new List<Fish>();
+            switch (teamDay.SelectedValue)
+            {
+                case "Dag 1":
+                    fishes = team.day1;
+                    break;
+                case "Dag 2":
+                    fishes = team.day2;
+                    break;
+                case "Dag 3":
+                    fishes = team.day3;
+                    break;
+            }
+            for (int i = 0; i < fishes.Count; i++)
+            {
+                gfx.DrawString($"{fishes[i].displayString} ", font, XBrushes.Black,
+                            new XRect(xPos, yPos, page.Width, page.Height),
+                            XStringFormat.TopLeft);
+                yPos += font.Size + 2;
+            }
+            yPos = page.Height - 100;
+
+            gfx.DrawString($"Datum: ", font, XBrushes.Black,
+                        new XRect(xPos, yPos, page.Width, page.Height),
+                        XStringFormat.TopLeft);
+            yPos += font.Size + 3;
+            gfx.DrawLine(pen, new XPoint(xPos, yPos), new XPoint(page.Width - 20, yPos));
+            yPos += 15;
+            gfx.DrawString($"Signatur: ", font, XBrushes.Black,
+                        new XRect(xPos, yPos, page.Width, page.Height),
+                        XStringFormat.TopLeft);
+            yPos += font.Size + 3;
+            gfx.DrawLine(pen, new XPoint(xPos, yPos), new XPoint(page.Width - 20, yPos));
 
 
             //End
             string filename = "Kvitto.pdf";
             document.Save(filename);
             Process.Start(filename);
+
+        }
+
+        private void HeaderText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                info.headerText = HeaderText.Text;
+                xml.saveInfo(info);
+                Keyboard.ClearFocus();
+            }
+        }
+
+        private void Button_ChangeHeader(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string s = openFileDialog.FileName;
+                info.headerPath = s.Replace(Directory.GetCurrentDirectory(), "");
+                xml.saveInfo(info);
+            }
+        }
+
+        private void Button_SponsorButton(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

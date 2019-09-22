@@ -74,6 +74,30 @@ namespace WpfApp1
             return fishes;
         }
 
+        public void saveInfo(Info info)
+        {
+            string folderPath = folder + "info/info.xml";
+            XmlSerializer serializer = new XmlSerializer(typeof(Info));
+            using (TextWriter tw = new StreamWriter(folderPath))
+            {
+                serializer.Serialize(tw, info);
+            }
+        }
+
+        public Info loadInfo()
+        {
+            Directory.CreateDirectory(folder + "/info");
+            string folderPath = folder + "info/info.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(folderPath);
+            XmlSerializer serializer = new XmlSerializer(typeof(Info));
+            TextReader reader = new StreamReader(folderPath);
+            object obj = serializer.Deserialize(reader);
+            Info info = (Info)obj;
+            reader.Close();
+            return info;
+        }
+
         public void DeleteTeam(Team team)
         {
             File.Delete(folder + team.Name + ".xml");

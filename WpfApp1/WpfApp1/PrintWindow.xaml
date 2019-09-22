@@ -7,14 +7,47 @@
         mc:Ignorable="d"
         Title="PrintWindow" Height="200" Width="600" ResizeMode="NoResize">
     <StackPanel>
-        <TextBox Name="teamNamn" Margin="5" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="HeaderText" Grid.Column="0" Margin="2" KeyDown="HeaderText_KeyDown">
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content=" Header Text" Foreground="Gray" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Grid.Column="1" Margin="2" Click="Button_ChangeHeader">Byt Header Bild</Button>
+            <Button Grid.Column="2" Margin="2" Click="Button_SponsorButton">Sponsor Logotyp</Button>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{x:Null}" Margin="0,5,0,0" />
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0" Background="{x:Null}" Margin="0,5,0,0" />
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1,0,1,0" Background="{x:Null}" Margin="0,5,0,0" />
             <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{x:Null}" Margin="0,5,0,0" />
 
             <StackPanel Grid.Column="0">
@@ -41,10 +74,10 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <ComboBox Margin="2,1" Name="teamDay" Grid.Column="1">
-                        <ComboBoxItem>Day1</ComboBoxItem>
-                        <ComboBoxItem>Day2</ComboBoxItem>
-                        <ComboBoxItem>Day3</ComboBoxItem>
+                    <ComboBox Margin="2,1" Name="teamDay" Grid.Column="1" SelectedValuePath="Content">
+                        <ComboBoxItem>Dag 1</ComboBoxItem>
+                        <ComboBoxItem>Dag 2</ComboBoxItem>
+                        <ComboBoxItem>Dag 3</ComboBoxItem>
                     </ComboBox>
                 </Grid>
 

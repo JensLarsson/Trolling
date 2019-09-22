@@ -48,7 +48,74 @@
       </fishType>
     </Fish>
   </day1>
-  <day2 />
+  <day2>
+    <Fish>
+      <weight>12341</weight>
+      <fishType>
+        <Name />
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>1234</weight>
+      <fishType>
+        <Name>Öring</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>1234</weight>
+      <fishType>
+        <Name>Öring</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>1234</weight>
+      <fishType>
+        <Name>Öring</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>5231</weight>
+      <fishType>
+        <Name>Öring</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>1234</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>1235</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>412</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>512</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>5234</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+    <Fish>
+      <weight>12345</weight>
+      <fishType>
+        <Name>Kanadaröding</Name>
+      </fishType>
+    </Fish>
+  </day2>
   <day3 />
   <Name>af3ewfawfcasx</Name>
 </Team>
