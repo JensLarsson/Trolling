@@ -20,12 +20,6 @@
     <Fish>
       <weight>123</weight>
       <fishType>
-        <Name>Röding</Name>
-      </fishType>
-    </Fish>
-    <Fish>
-      <weight>123</weight>
-      <fishType>
         <Name>Öring</Name>
       </fishType>
     </Fish>
@@ -33,12 +27,6 @@
       <weight>123</weight>
       <fishType>
         <Name>Kanadaröding</Name>
-      </fishType>
-    </Fish>
-    <Fish>
-      <weight>123</weight>
-      <fishType>
-        <Name>Öring</Name>
       </fishType>
     </Fish>
     <Fish>

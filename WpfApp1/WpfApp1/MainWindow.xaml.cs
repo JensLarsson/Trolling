@@ -230,5 +230,19 @@ namespace WpfApp1
             }
             xml.SaveTeam(teamList.SelectedItem as Team);
         }
+
+        private void ButtonImportTeam_Click(object sender, RoutedEventArgs e)
+        {
+            TeamImportWindow window = new TeamImportWindow((List<Team> t) =>
+            {
+                foreach (Team team in t)
+                {
+                    teams.Add(team);
+                    teamList.Items.Refresh();
+                    xml.SaveTeam(team, true);
+                }
+            });
+            window.ShowDialog();
+        }
     }
 }

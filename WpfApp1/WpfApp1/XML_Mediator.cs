@@ -38,8 +38,14 @@ namespace WpfApp1
             return teams;
         }
 
-        public void SaveTeam(Team team)
+        public void SaveTeam(Team team, bool newTeam=false)
         {
+            if (newTeam)
+            {
+                team.day1 = new List<Fish>();
+                team.day2 = new List<Fish>();
+                team.day3 = new List<Fish>();
+            }
             string folderPath = folder + team.Name + ".xml";
             XmlSerializer serializer = new XmlSerializer(typeof(Team));
             using (TextWriter tw = new StreamWriter(folderPath))

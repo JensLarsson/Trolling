@@ -59,3 +59,5 @@ D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\PdfSharp.Charting.xml
 D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\de\PdfSharp.resources.dll
 D:\GitHub\Trolling\WpfApp1\WpfApp1\bin\Debug\de\PdfSharp.Charting.resources.dll
 D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\WpfApp1.csproj.CopyComplete
+D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\TeamImportWindow.g.cs
+D:\GitHub\Trolling\WpfApp1\WpfApp1\obj\Debug\TeamImportWindow.baml

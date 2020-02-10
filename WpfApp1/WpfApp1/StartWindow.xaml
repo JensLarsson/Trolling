@@ -20,10 +20,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width=".3*" />
+                <ColumnDefinition Width=".3*" />
             </Grid.ColumnDefinitions>
             
             <TextBox Name="folderName"></TextBox>
             <Button Click="Button_Click" Grid.Column="1">Ny</Button>
+            <Button Click="CloneButton_Click" Grid.Column="2">Kopiera</Button>
         </Grid>
         <ListBox BorderThickness="0" Name="lista" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" FontSize="30" HorizontalContentAlignment="Center" MouseDoubleClick="Lista_MouseDoubleClick">
             

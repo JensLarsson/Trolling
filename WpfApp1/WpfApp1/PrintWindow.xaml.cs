@@ -20,7 +20,7 @@ using Microsoft.Win32;
 namespace WpfApp1
 {
     /// <summary>
-    /// Interaction logic for PrintWindow.xaml
+    /// Yes, this is an even worse mess than the rest of this program.
     /// </summary>
     public partial class PrintWindow : Window
     {
@@ -49,6 +49,32 @@ namespace WpfApp1
             teamChoise.ItemsSource = teams;
             teamChoise.SelectedIndex = 0;
             teamDay.SelectedIndex = 0;
+            info.advertiserPaths.Add("/Image/Temp1.png");
+            info.advertiserPaths.Add("/Image/Temp2.png");
+        }
+
+        private void PrintAds(XGraphics gfx, PdfPage page, Double yPadding)
+        {
+            double maxHeight = 100;
+            double maxWidth = 300;
+            XPoint point = new XPoint(page.Width - 4, yPadding);
+            foreach (string s in info.advertiserPaths)
+            {
+                XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + s);
+                double scale;
+                if (image.Height >= image.Width)
+                {
+                    scale = maxHeight / image.Height;
+                }
+                else
+                {
+                    scale = maxWidth / image.Width;
+                }
+                
+                point.X = page.Width - image.Width * scale - 4;
+                gfx.DrawImage(image, point.X, point.Y, image.Width*scale, image.Height * scale);
+                point.Y += image.Height * scale;
+            }
         }
 
         //Skriver ut alla lag i positionsordning
@@ -58,18 +84,24 @@ namespace WpfApp1
             teamArray = teams.ToArray();
             // Create a new PDF document
             PdfDocument document = new PdfDocument();
-
+            XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + info.headerPath);
+            PdfPage temp = new PdfDocument().AddPage();
+            double scale = (temp.Width - 10) / image.Width;
             int pages;
             if ((bool)printFish.IsChecked)
             {
-                pages = (int)Math.Ceiling(teams.Count / 5.0f);
+                double d = (temp.Height - (image.Height * scale + 5) - 10) / (8.5 * 18); //only used for the rowCount int
+                int rowCount = (int)d;
+                pages = (int)Math.Ceiling(teams.Count / (float)rowCount);
             }
             else
             {
-                pages = (int)Math.Ceiling(teams.Count / 40.0f);
+
+                double d = (temp.Height - (image.Height * scale + 5) - 10) / 20; //only used for the rowCount int
+                int teamsOnPage = (int)d;
+                pages = (int)Math.Ceiling(teams.Count / (float)teamsOnPage);
             }
 
-            XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + info.headerPath);
             for (int pageIndex = 0; pageIndex < pages; pageIndex++)
             {
                 // Create an empty page
@@ -83,21 +115,20 @@ namespace WpfApp1
 
                 XFont font = new XFont("Verdana", 16, XFontStyle.Bold);
 
-                double scale = (page.Width - 10) / image.Width;
                 gfx.DrawImage(image, horizontal, vertical, image.Width * scale, image.Height * scale);
-
                 vertical += image.Height * scale + 5;
+
                 gfx.DrawString(HeaderText.Text, font, XBrushes.Black,
                                 new XRect(80, image.Height * scale / 2 - 4, page.Width, page.Height),
                                 XStringFormat.TopLeft);
-
+                PrintAds(gfx, page, vertical + 4);
                 if ((bool)printFish.IsChecked) //This loop is super slow for some reason
                 {
-                    double d = (page.Height - (image.Height * scale + 5) - 10) / (8.5 * (font.Size + verticalSpacing)); //only used for the rowCount int
+                    double d = (page.Height - (image.Height * scale + 5) - 10) / (8.5 * 18); //only used for the rowCount int
                     int teamsOnPage = (int)d;
                     for (int Index = 0; Index < teamsOnPage; Index++)
                     {
-                        int teamIndex = pageIndex * 5 + Index;
+                        int teamIndex = pageIndex * teamsOnPage + Index;
                         if (teamIndex >= teams.Count)
                         {
                             break;
@@ -166,7 +197,7 @@ namespace WpfApp1
 
                     for (int Index = 0; Index < rowCount; Index++)
                     {
-                        int teamIndex = pageIndex * 40 + Index;
+                        int teamIndex = pageIndex * rowCount + Index;
                         if (teamIndex >= teams.Count)
                         {
                             break;

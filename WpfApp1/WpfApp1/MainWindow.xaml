@@ -20,19 +20,28 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Name="teamList" DisplayMemberPath="Name" SelectionChanged="TeamList_SelectionChanged"  Grid.ColumnSpan="2" Margin="0,5">
+            <ListBox Name="teamList" DisplayMemberPath="Name" SelectionChanged="TeamList_SelectionChanged"  Grid.ColumnSpan="3" Margin="0,5">
             </ListBox>
             <Label Grid.Row="1" Grid.Column="0">Lagnamn:</Label>
             <Label Grid.Row="2" Grid.Column="0">Kännetecken:</Label>
-            <TextBox Name="teamNamn" Grid.Column="1" Grid.Row="1"  Margin="0,5" />
-            <TextBox Name="marker" Grid.Column="1" Grid.Row="2"  Margin="0,5" />
-            <Button Grid.Column="1" Grid.Row="3" Margin="0,5"  Name="buttonSaveTeam" Click="ButtonSaveTeam_Click">Skapa Lag</Button>
-            <Button Grid.Column="1" Grid.Row="4" Margin="0,5" Name="buttonRemoveTeam" Click="ButtonRemoveTeam_Click">Ta Bort Markerat Lag</Button>
+            <TextBox Name="teamNamn" Grid.Column="1" Grid.Row="1" Margin="0,5" />
+            <TextBox Name="marker" Grid.Column="1" Grid.Row="2" Margin="0,5" />
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="2,5"  Name="buttonSaveTeam" Click="ButtonSaveTeam_Click">Skapa Lag</Button>
+                <Button Grid.Column="1" Margin="2,5" Name="buttonRemoveTeam" Click="ButtonRemoveTeam_Click">Ta Bort Vald</Button>
+                <Button Grid.Column="2" Margin="2,5" Name="buttonImportTeam" Click="ButtonImportTeam_Click">Importera Lag</Button>
+            </Grid>
 
         </Grid>
         <Grid Grid.Column="1" Margin="10">

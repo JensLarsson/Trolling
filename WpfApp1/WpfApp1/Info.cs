@@ -10,5 +10,6 @@ namespace WpfApp1
     {
         public string headerText = "";
         public string headerPath = "/Image/JamtTroll.png";
+        public List<string> advertiserPaths = new List<string>();
     }
 }
