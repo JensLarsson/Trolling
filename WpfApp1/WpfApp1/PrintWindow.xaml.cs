@@ -49,8 +49,6 @@ namespace WpfApp1
             teamChoise.ItemsSource = teams;
             teamChoise.SelectedIndex = 0;
             teamDay.SelectedIndex = 0;
-            info.advertiserPaths.Add("/Image/Temp1.png");
-            info.advertiserPaths.Add("/Image/Temp2.png");
         }
 
         private void PrintAds(XGraphics gfx, PdfPage page, Double yPadding)
@@ -60,7 +58,7 @@ namespace WpfApp1
             XPoint point = new XPoint(page.Width - 4, yPadding);
             foreach (string s in info.advertiserPaths)
             {
-                XImage image = XImage.FromFile(Directory.GetCurrentDirectory() + s);
+                XImage image = XImage.FromFile(Directory.GetCurrentDirectory()+s);
                 double scale;
                 if (image.Height >= image.Width)
                 {
@@ -301,11 +299,7 @@ namespace WpfApp1
                     vertical += font.Size * 1.5 + verticalSpacing; //new row
                 }
             }
-
-
-
-
-
+            
 
             // Save the document...
             string filename = "Laglista.pdf";
@@ -409,7 +403,24 @@ namespace WpfApp1
 
         private void Button_SponsorButton(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                info.advertiserPaths = new List<string>();
+                foreach (String file in openFileDialog.FileNames)
+                {
+                    info.advertiserPaths.Add(file.Replace(Directory.GetCurrentDirectory(), ""));
+                }
+                xml.saveInfo(info);
+            }
+        }
 
+        private void Excel_Click(object sender, RoutedEventArgs e)
+        {
+            XL_Mediator xlMediator = new XL_Mediator();
+            xlMediator.CreateResultPage(teams,info.headerText);
         }
     }
 }

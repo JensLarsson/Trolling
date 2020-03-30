@@ -83,5 +83,19 @@
 
             </StackPanel>
         </Grid>
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="0,0,1,0" Background="{x:Null}" Margin="0,5,0,0" />
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1,0,1,0" Background="{x:Null}" Margin="0,5,0,0" />
+                <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1,0,0,0" Background="{x:Null}" Margin="0,5,0,0" />
+
+                <Button Grid.Column="0" Name="Excel" Click="Excel_Click" Margin="2,10,2,4">Print Exel Scoreboard</Button>
+            </Grid>
+        </Grid>
     </StackPanel>
 </Window>
