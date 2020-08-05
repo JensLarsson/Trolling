@@ -154,7 +154,7 @@ namespace WpfApp1
 
         private void ButtonDeleteMember_Click(object sender, RoutedEventArgs e)
         {
-            if (membrList.SelectedItem != null)
+            if (membrList.SelectedItem != null && membrList.Items.Count > 1)
             {
                 (teamList.SelectedItem as Team)._members.RemoveAt(membrList.SelectedIndex);
                 membrList.Items.Refresh();

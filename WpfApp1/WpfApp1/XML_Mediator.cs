@@ -14,6 +14,7 @@ namespace WpfApp1
         string folder;
         public XML_Mediator(string s)
         {
+            
             folder = Directory.GetCurrentDirectory() + "/Teams/" + s + "/";
         }
 
@@ -21,6 +22,7 @@ namespace WpfApp1
         {
             List<Team> teams = new List<Team>();
             string folderPath = folder;
+
             foreach (string file in Directory.EnumerateFiles(folderPath, "*.xml"))
             {
                 XmlDocument doc = new XmlDocument();
@@ -38,7 +40,7 @@ namespace WpfApp1
             return teams;
         }
 
-        public void SaveTeam(Team team, bool newTeam=false)
+        public void SaveTeam(Team team, bool newTeam = false)
         {
             if (newTeam)
             {

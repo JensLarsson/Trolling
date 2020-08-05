@@ -106,7 +106,7 @@ namespace WpfApp1
         {
             try
             {
-                fishList.ItemsSource = (Dag1.SelectedItem as Team).day1;
+                fishList.ItemsSource = (Dag1.SelectedItem as Team)?.day1;
             }
             catch { }
         }
@@ -115,7 +115,7 @@ namespace WpfApp1
         {
             try
             {
-                fishList.ItemsSource = (Dag2.SelectedItem as Team).day2;
+                fishList.ItemsSource = (Dag2.SelectedItem as Team)?.day2;
             }
             catch { }
         }
@@ -124,7 +124,7 @@ namespace WpfApp1
         {
             try
             {
-                fishList.ItemsSource = (Dag3.SelectedItem as Team).day3;
+                fishList.ItemsSource = (Dag3.SelectedItem as Team)?.day3;
             }
             catch { }
         }

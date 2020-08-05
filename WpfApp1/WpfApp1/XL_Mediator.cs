@@ -13,9 +13,32 @@ namespace WpfApp1
 {
     class XL_Mediator
     {
+
         public void CreateResultPage(List<Team> teamList, string title)
         {
-            string file = Directory.GetCurrentDirectory() + $"/Spreadsheets/{title}.xls";
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + $"/Spreadsheets/"))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + $"/Spreadsheets/");
+            }
+            string fileName = "";
+            if (title != "")
+            {
+                fileName = Directory.GetCurrentDirectory() + $"/Spreadsheets/{title}.xls";
+            }
+            else
+            {
+                fileName = Directory.GetCurrentDirectory() + $"/Spreadsheets/sheet.xls";
+            }
+            string extension = ".xls";
+
+            int count = 0;
+            while (File.Exists(fileName))
+            {
+                if (count == 0)
+                    fileName = fileName.Replace(extension, "(" + ++count + ")" + extension);
+                else
+                    fileName = fileName.Replace("(" + count + ")" + extension, "(" + ++count + ")" + extension);
+            }
             Workbook workbook = new Workbook();
             Worksheet[] workSheets = new Worksheet[] {
                 new Worksheet("Day1"),
@@ -82,8 +105,8 @@ namespace WpfApp1
                 rad++;
             }
             workbook.Worksheets.Add(workSheet);
-            workbook.Save(file);
-            Process.Start(file);
+            workbook.Save(fileName);
+            Process.Start(fileName);
         }
         //public void CreateTeamList(List<Team> teamList)
         //{

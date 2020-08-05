@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="HeaderText" Grid.Column="0" Margin="2" KeyDown="HeaderText_KeyDown">
+            <TextBox Name="HeaderText" Grid.Column="0" Margin="2" KeyDown="HeaderText_KeyDown" TextChanged="HeaderText_TextChanged">
                 <TextBox.Style>
                     <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                         <Style.Resources>

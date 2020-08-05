@@ -29,6 +29,11 @@ namespace WpfApp1
 
         void GetFolders()
         {
+            string folder = Directory.GetCurrentDirectory() + "/Teams/";
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
             string s = Directory.GetCurrentDirectory() + "/Teams";
             var directories = Directory.GetDirectories(s);
             for (int i = 0; i < directories.Length; i++)
